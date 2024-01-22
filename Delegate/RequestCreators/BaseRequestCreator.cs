@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Delegate.RequestCreators
 {
-    public class BaseRequestCreator
+    public abstract class BaseRequestCreator
     {
         protected string MakeRequest()
         {
@@ -22,7 +22,7 @@ namespace Delegate.RequestCreators
             
 
 
-            var httpRes = client.GetAsync("posts").GetAwaiter().GetResult();
+            
 
             var msg = new HttpRequestMessage
             {
@@ -36,7 +36,7 @@ namespace Delegate.RequestCreators
                 msg.Content=new StringContent(JsonSerializer.Serialize(bodyContent));
             }
 
-            client.Send(msg);
+            var httpRes =client.Send(msg);
 
             httpRes.EnsureSuccessStatusCode();
             var resultContent = httpRes.Content.ReadAsStringAsync().GetAwaiter().GetResult();

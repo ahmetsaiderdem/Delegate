@@ -11,9 +11,21 @@ namespace Delegate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GetPostRequestCreator req=new GetPostRequestCreator();
-           var posts= req.GetPosts();
+            var req = new GetPostRequestCreator();
+            var posts = req.GetPosts();
             MessageBox.Show(posts.FirstOrDefault().title);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var req =new CreatePostRequestCreator();
+            var createPost = req.CreatePost(new Models.PostModel() 
+            { 
+                title="foo",
+                body="bar",
+                userId=1
+            });
+            MessageBox.Show($"result id: {createPost.title}");
         }
     }
 }
